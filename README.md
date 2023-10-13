@@ -1,1 +1,1 @@
-#I made this project from scratch using HTML, CSS & JS
+#I made this project from scratch using HTML, CSS & JS.

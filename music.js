@@ -121,13 +121,11 @@ playBtn.addEventListener("click", function () {
 
     if (audio.paused) {
 
-
         playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
-        let which = document.getElementById(`${index}`);
+        let toChangeIcon = document.getElementById(`${index}`);
 
-        which.classList.replace("fa-circle-play", "fa-circle-pause");
-
+        toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
 
         audio.play();
 
@@ -139,9 +137,9 @@ playBtn.addEventListener("click", function () {
 
         playBtn.classList.replace("fa-circle-pause", "fa-circle-play");
 
-        let which = document.getElementById(`${index}`); 
+        let toChangeIcon = document.getElementById(`${index}`); 
 
-        which.classList.replace("fa-circle-pause", "fa-circle-play");
+        toChangeIcon.classList.replace("fa-circle-pause", "fa-circle-play");
 
         songItem[index].querySelector(".gif").removeChild(animation);
 
@@ -167,9 +165,9 @@ previous.addEventListener("click", (e) => {
 
     closeBothPlayBtns();
 
-    let which = document.getElementById(`${index}`);
+    let toChangeIcon = document.getElementById(`${index}`);
 
-    which.classList.replace("fa-circle-play", "fa-circle-pause");
+    toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
 
     playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
@@ -198,9 +196,9 @@ next.addEventListener("click", (e) => {
 
     closeBothPlayBtns();
 
-    let which = document.getElementById(`${index}`);
+    let toChangeIcon = document.getElementById(`${index}`);
 
-    which.classList.replace("fa-circle-play", "fa-circle-pause");
+    toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
 
     playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
@@ -271,9 +269,9 @@ audio.addEventListener("ended", () => {
 
     playBtn.classList.replace("fa-circle-pause", "fa-circle-play");
 
-    let which = document.getElementById(`${index}`);
+    let toChangeIcon = document.getElementById(`${index}`);
 
-    which.classList.replace("fa-circle-pause", "fa-circle-play");
+    toChangeIcon.classList.replace("fa-circle-pause", "fa-circle-play");
 
     songItem[index].querySelector(".gif").removeChild(animation)
 

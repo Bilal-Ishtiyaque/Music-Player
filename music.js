@@ -8,13 +8,16 @@ const doc = document.body;
 let audio = new Audio("");
 let playBtn = document.querySelector("#playBtn");
 let progressBar = document.querySelector("#progressBar");
+let gif = document.querySelectorAll(".gif");
 let iconBtns = document.querySelectorAll(".icon i");  //icons on left portion
 let songPlayPic = document.querySelector(".songPlayPic img");
 let songPlayName = document.querySelector(".songPlayName");
 let previous = document.querySelector(".fa-backward-step");
 let next = document.querySelector(".fa-forward-step");
 let songItem = document.querySelectorAll(".songItem");
+let currTime = 0;
 let index;
+let oldIndex;
 
 let songs = [
     { songName: "Für Elise Beethoven. Für Elise", filePath: "./music/song0.mp3", songPic: "images/image0.jfif" },
@@ -93,16 +96,24 @@ iconBtns.forEach(function (element) {
             songPlayPic.src = songs[index].songPic;
             songPlayName.innerText = songs[index].songName;
 
+            if(index === oldIndex){
+                audio.currentTime = currTime;
+            }else{
+                audio.currentTime = 0;
+            }
+
             audio.play();
 
-            songItem[index].querySelector(".gif").appendChild(animation);
+            gif[index].appendChild(animation);
 
 
         } else {
 
             audio.pause();
 
-            songItem[index].querySelector(".gif").removeChild(animation);
+            oldIndex = index;
+
+            gif[index].removeChild(animation);
 
             element.classList.replace("fa-circle-pause", "fa-circle-play");
 
@@ -123,13 +134,12 @@ playBtn.addEventListener("click", function () {
 
         playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
-        let toChangeIcon = document.getElementById(`${index}`);
 
-        toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
+        iconBtns[index].classList.replace("fa-circle-play", "fa-circle-pause");
 
         audio.play();
 
-        songItem[index].querySelector(".gif").appendChild(animation);
+        gif[index].appendChild(animation);
 
     } else {
 
@@ -137,11 +147,9 @@ playBtn.addEventListener("click", function () {
 
         playBtn.classList.replace("fa-circle-pause", "fa-circle-play");
 
-        let toChangeIcon = document.getElementById(`${index}`); 
+        iconBtns[index].classList.replace("fa-circle-pause", "fa-circle-play");
 
-        toChangeIcon.classList.replace("fa-circle-pause", "fa-circle-play");
-
-        songItem[index].querySelector(".gif").removeChild(animation);
+        gif[index].removeChild(animation);
 
     }
 
@@ -165,9 +173,7 @@ previous.addEventListener("click", (e) => {
 
     closeBothPlayBtns();
 
-    let toChangeIcon = document.getElementById(`${index}`);
-
-    toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
+    iconBtns[index].classList.replace("fa-circle-play", "fa-circle-pause");
 
     playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
@@ -175,7 +181,7 @@ previous.addEventListener("click", (e) => {
 
     audio.play();
 
-    songItem[index].querySelector(".gif").appendChild(animation);
+    gif[index].appendChild(animation);
 
 
 
@@ -196,9 +202,7 @@ next.addEventListener("click", (e) => {
 
     closeBothPlayBtns();
 
-    let toChangeIcon = document.getElementById(`${index}`);
-
-    toChangeIcon.classList.replace("fa-circle-play", "fa-circle-pause");
+    iconBtns[index].classList.replace("fa-circle-play", "fa-circle-pause");
 
     playBtn.classList.replace("fa-circle-play", "fa-circle-pause");
 
@@ -206,7 +210,7 @@ next.addEventListener("click", (e) => {
 
     audio.play();
 
-    songItem[index].querySelector(".gif").appendChild(animation);
+    gif[index].appendChild(animation);
 
 
 
@@ -256,6 +260,8 @@ audio.addEventListener("timeupdate", function () {
         document.querySelector(".totalTime").innerText = `${totalMins}`;
     }
 
+    currTime = audio.currentTime;
+
 
 });
 
@@ -269,11 +275,9 @@ audio.addEventListener("ended", () => {
 
     playBtn.classList.replace("fa-circle-pause", "fa-circle-play");
 
-    let toChangeIcon = document.getElementById(`${index}`);
+    iconBtns[index].classList.replace("fa-circle-pause", "fa-circle-play");
 
-    toChangeIcon.classList.replace("fa-circle-pause", "fa-circle-play");
-
-    songItem[index].querySelector(".gif").removeChild(animation)
+    gif[index].removeChild(animation)
 
     progressBar.value = 0;
 
